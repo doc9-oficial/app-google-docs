@@ -1,0 +1,77 @@
+{
+    "name": "gdocs",
+    "version": "1.0.0",
+    "description": "Integração com Google Docs/Drive",
+    "functions": {
+        "listarArquivos": {
+            "script": "dist/listarArquivos.js",
+            "description": "Lista arquivos no Google Drive",
+            "category": "google",
+            "params": [
+                {
+                    "name": "q",
+                    "type": "string",
+                    "required": false,
+                    "description": "Query do Drive (ex.: mimeType='application/vnd.google-apps.document')",
+                    "form": {
+                        "type": "text",
+                        "label": "Query",
+                        "placeholder": "mimeType contains 'application/'"
+                    }
+                },
+                {
+                    "name": "pageSize",
+                    "type": "number",
+                    "required": false,
+                    "description": "Tamanho da página",
+                    "form": {
+                        "type": "number",
+                        "label": "Page Size",
+                        "placeholder": "20"
+                    }
+                }
+            ]
+        },
+        "lerDocumento": {
+            "script": "dist/lerDocumento.js",
+            "description": "Lê um documento do Google Docs",
+            "category": "google",
+            "params": [
+                {
+                    "name": "documentId",
+                    "type": "string",
+                    "required": true,
+                    "description": "ID do documento",
+                    "form": {
+                        "type": "text",
+                        "label": "Document ID",
+                        "placeholder": "1AbcXYZ..."
+                    }
+                }
+            ]
+        },
+        "criarDocumento": {
+            "script": "dist/criarDocumento.js",
+            "description": "Cria um novo documento no Google Docs",
+            "category": "google",
+            "params": [
+                {
+                    "name": "titulo",
+                    "type": "string",
+                    "required": true,
+                    "description": "Título do documento",
+                    "form": {
+                        "type": "text",
+                        "label": "Título",
+                        "placeholder": "Meu documento"
+                    }
+                }
+            ]
+        }
+    },
+    "config": {
+        "timeout": 60000,
+        "max_retries": 2
+    },
+    "mcp": true
+}
