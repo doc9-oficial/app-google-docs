@@ -84,6 +84,31 @@
                     "label": "Conteúdo inicial do documento (opcional)"
                 }
             ]
+        },
+        "atualizarDocumento": {
+            "script": "dist/atualizarDocumento.js",
+            "description": "Atualiza o conteúdo de um documento do Google Docs",
+            "category": "google",
+            "values": {
+                "documentId": "1AbcXYZ...",
+                "conteudo": "Este é o novo conteúdo do documento."
+            },
+            "params": [
+                {
+                    "name": "documentId",
+                    "type": "string",
+                    "required": true,
+                    "inputType": "text",
+                    "label": "ID do documento"
+                },
+                {
+                    "name": "conteudo",
+                    "type": "string",
+                    "required": true,
+                    "inputType": "text",
+                    "label": "Novo conteúdo do documento"
+                }
+            ]
         }
     },
     "config": {
