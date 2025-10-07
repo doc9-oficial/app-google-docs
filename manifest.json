@@ -1,34 +1,45 @@
 {
-    "name": "gdocs",
-    "version": "1.0.0",
+    "name": "app-google-docs",
+    "version": "2.0.0",
     "description": "Integração com Google Docs/Drive",
+    "auth": {
+        "description": {
+            "title": "Token de autenticação à API do Google",
+            "body": "Para usar esta aplicação, você precisa de um token de autenticação do Google com as seguintes permissões:\n\n- https://www.googleapis.com/auth/drive.readonly\n- https://www.googleapis.com/auth/documents.readonly\n\nVocê pode obter um token criando um projeto no [Google Cloud Console](https://console.cloud.google.com/), habilitando a API do Google Drive e Google Docs, e criando credenciais de OAuth 2.0. Após criar as credenciais, você pode usar a ferramenta [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/) para gerar um token de acesso com as permissões necessárias.",
+            "link": "https://developers.google.com/identity/protocols/oauth2"
+        },
+        "params": [
+            {
+                "name": "googleAccessToken",
+                "type": "string",
+                "inputType": "password",
+                "required": true
+            }
+        ]
+    },
     "functions": {
         "listarArquivos": {
             "script": "dist/listarArquivos.js",
             "description": "Lista arquivos no Google Drive",
             "category": "google",
+            "values": {
+                "q": "mimeType contains 'application/'",
+                "pageSize": 20
+            },
             "params": [
                 {
                     "name": "q",
                     "type": "string",
+                    "inputType": "text",
                     "required": false,
-                    "description": "Query do Drive (ex.: mimeType='application/vnd.google-apps.document')",
-                    "form": {
-                        "type": "text",
-                        "label": "Query",
-                        "placeholder": "mimeType contains 'application/'"
-                    }
+                    "label": "Filtro de consulta"
                 },
                 {
                     "name": "pageSize",
                     "type": "number",
                     "required": false,
-                    "description": "Tamanho da página",
-                    "form": {
-                        "type": "number",
-                        "label": "Page Size",
-                        "placeholder": "20"
-                    }
+                    "inputType": "number",
+                    "label": "Número máximo de arquivos a retornar"
                 }
             ]
         },
@@ -36,17 +47,16 @@
             "script": "dist/lerDocumento.js",
             "description": "Lê um documento do Google Docs",
             "category": "google",
+            "values": {
+                "documentId": "1AbcXYZ..."
+            },
             "params": [
                 {
                     "name": "documentId",
                     "type": "string",
                     "required": true,
-                    "description": "ID do documento",
-                    "form": {
-                        "type": "text",
-                        "label": "Document ID",
-                        "placeholder": "1AbcXYZ..."
-                    }
+                    "inputType": "text",
+                    "label": "ID do documento"
                 }
             ]
         },
@@ -54,17 +64,24 @@
             "script": "dist/criarDocumento.js",
             "description": "Cria um novo documento no Google Docs",
             "category": "google",
+            "values": {
+                "titulo": "Olá, Mundo! Aqui é o doc doc go.",
+                "conteudo": "Este é o conteúdo inicial do documento."
+            },
             "params": [
                 {
                     "name": "titulo",
                     "type": "string",
                     "required": true,
-                    "description": "Título do documento",
-                    "form": {
-                        "type": "text",
-                        "label": "Título",
-                        "placeholder": "Meu documento"
-                    }
+                    "inputType": "text",
+                    "label": "Título do novo documento"
+                },
+                {
+                    "name": "conteudo",
+                    "type": "string",
+                    "required": false,
+                    "inputType": "text",
+                    "label": "Conteúdo inicial do documento (opcional)"
                 }
             ]
         }

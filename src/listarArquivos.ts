@@ -8,6 +8,9 @@ interface ListarArquivosParams {
 
 async function listarArquivos(params: ListarArquivosParams): Promise<void> {
   try {
+    if (Array.isArray(params) && params.length === 1 && typeof params[0] === 'object') {
+      params = params[0];
+    }
     const pageSize = params.pageSize ?? 20;
     const data = await gapiGet("/drive/v3/files", {
       q: params.q || "mimeType contains 'application/'",

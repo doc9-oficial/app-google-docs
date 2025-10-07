@@ -1,16 +1,18 @@
 import docgo from "docgo-sdk";
 
 export function getGoogleAccessToken(): string | null {
-  // Preferir secrets por requisição (DOCGO_GOOGLE_ACCESS_TOKEN injetado)
   return (
     docgo.getEnv("GOOGLE_ACCESS_TOKEN") ||
-    docgo.getEnv("DOCGO_GOOGLE_ACCESS_TOKEN")
+    docgo.getEnv("DOCGO_GOOGLE_ACCESS_TOKEN") ||
+    docgo.getEnv("googleAccessToken") ||
+    docgo.getEnv("docgoGoogleAccessToken") ||
+    null
   );
 }
 
 export function getGoogleAPIBase(): string {
   return (
-    docgo.getEnv("GOOGLE_API_BASE") || "https://www.googleapis.com"
+    docgo.getEnv("GOOGLE_API_BASE") || "https://docs.googleapis.com"
   ).replace(/\/$/, "");
 }
 
@@ -19,13 +21,16 @@ export async function gapiGet(
   query: Record<string, string> = {}
 ) {
   const token = getGoogleAccessToken();
-  if (!token) throw new Error("Google access token não configurado");
+  if (!token) docgo.result(false, null, "Google access token não configurado");
+  
   const base = getGoogleAPIBase();
   const url = new URL(base + path);
   for (const [k, v] of Object.entries(query)) url.searchParams.set(k, v);
+  
   const resp = await fetch(url.toString(), {
     headers: { Authorization: `Bearer ${token}` },
   } as any);
+  
   if (!resp.ok) throw new Error(`Google API erro ${resp.status}`);
   return resp.json();
 }
