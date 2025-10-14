@@ -19,6 +19,7 @@
     },
     "functions": {
         "listarArquivos": {
+            "name": "Listar Arquivos no Google Drive",
             "script": "dist/listarArquivos.js",
             "description": "Lista arquivos no Google Drive",
             "category": "google",
@@ -49,6 +50,7 @@
             ]
         },
         "lerDocumento": {
+            "name": "Ler Documento do Google Docs",
             "script": "dist/lerDocumento.js",
             "description": "Lê um documento do Google Docs",
             "category": "google",
@@ -71,6 +73,7 @@
             ]
         },
         "criarDocumento": {
+            "name": "Criar Documento no Google Docs",
             "script": "dist/criarDocumento.js",
             "description": "Cria um novo documento no Google Docs",
             "category": "google",
@@ -101,6 +104,7 @@
             ]
         },
         "atualizarDocumento": {
+            "name": "Atualizar Documento no Google Docs",
             "script": "dist/atualizarDocumento.js",
             "description": "Atualiza o conteúdo de um documento do Google Docs",
             "category": "google",
