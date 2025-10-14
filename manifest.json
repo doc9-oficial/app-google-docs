@@ -26,6 +26,11 @@
                 "q": "mimeType contains 'application/'",
                 "pageSize": 20
             },
+            "help": {
+                "title": "Listagem de Arquivos no Google Drive",
+                "body": "Esta função lista arquivos armazenados no seu Google Drive. Você pode aplicar filtros para refinar os resultados, como tipo de arquivo ou nome. O parâmetro `pageSize` define o número máximo de arquivos a serem retornados na resposta.",
+                "footer": "Certifique-se de que o token de acesso tenha as permissões necessárias para acessar os arquivos do Google Drive."
+            },
             "params": [
                 {
                     "name": "q",
@@ -50,6 +55,11 @@
             "values": {
                 "documentId": "1AbcXYZ..."
             },
+            "help": {
+                "title": "Leitura de Documento do Google Docs",
+                "body": "Esta função lê o conteúdo de um documento específico do Google Docs usando o ID do documento. O ID do documento pode ser encontrado na URL do documento quando você o abre no Google Docs.",
+                "footer": "Certifique-se de que o token de acesso tenha as permissões necessárias para acessar o documento do Google Docs."
+            },
             "params": [
                 {
                     "name": "documentId",
@@ -67,6 +77,11 @@
             "values": {
                 "titulo": "Olá, Mundo! Aqui é o doc doc go.",
                 "conteudo": "Este é o conteúdo inicial do documento."
+            },
+            "help": {
+                "title": "Criação de Documento no Google Docs",
+                "body": "Esta função cria um novo documento no Google Docs com um título e conteúdo inicial especificados. Você pode personalizar o título e o conteúdo conforme necessário.",
+                "footer": "Certifique-se de que o token de acesso tenha as permissões necessárias para criar documentos no Google Docs."
             },
             "params": [
                 {
@@ -92,6 +107,11 @@
             "values": {
                 "documentId": "1AbcXYZ...",
                 "conteudo": "Este é o novo conteúdo do documento."
+            },
+            "help": {
+                "title": "Atualização de Documento no Google Docs",
+                "body": "Esta função atualiza o conteúdo de um documento existente no Google Docs usando o ID do documento. Você pode fornecer o novo conteúdo que deseja inserir no documento.",
+                "footer": "Certifique-se de que o token de acesso tenha as permissões necessárias para editar o documento do Google Docs."
             },
             "params": [
                 {
