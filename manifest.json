@@ -81,7 +81,7 @@
             "category": "google",
             "values": {
                 "titulo": "Olá, Mundo! Aqui é o doc doc go.",
-                "conteudo": "Este é o conteúdo inicial do documento."
+                "content": "Este é o conteúdo inicial do documento."
             },
             "help": {
                 "title": "Criação de Documento no Google Docs",
@@ -97,7 +97,7 @@
                     "label": "Título do novo documento"
                 },
                 {
-                    "name": "conteudo",
+                    "name": "content",
                     "type": "string",
                     "required": false,
                     "inputType": "text",
@@ -113,7 +113,7 @@
             "category": "google",
             "values": {
                 "documentId": "1AbcXYZ...",
-                "conteudo": "Este é o novo conteúdo do documento."
+                "content": "Este é o novo conteúdo do documento."
             },
             "help": {
                 "title": "Atualização de Documento no Google Docs",
@@ -129,7 +129,7 @@
                     "label": "ID do documento"
                 },
                 {
-                    "name": "conteudo",
+                    "name": "content",
                     "type": "string",
                     "required": true,
                     "inputType": "text",
