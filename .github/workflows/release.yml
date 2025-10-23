@@ -1,5 +1,3 @@
-
-# Workflow para buildar, empacotar e publicar release 'latest'
 name: Release Latest
 
 on:
