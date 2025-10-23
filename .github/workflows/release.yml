@@ -32,6 +32,7 @@ jobs:
           cp -r node_modules package/
           cp package.json package/
           cp manifest.json package/
+          touch package/.ready
 
       - name: Create zip archive
         run: |
