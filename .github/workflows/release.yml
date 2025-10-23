@@ -4,8 +4,8 @@ name: Release Latest
 
 on:
   push:
-    tags:
-      - 'latest'
+    branches:
+      - 'main'
 
 jobs:
   build-and-package-latest:
