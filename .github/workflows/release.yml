@@ -37,14 +37,14 @@ jobs:
       - name: Create zip archive
         run: |
           cd package
-          zip -r ../gdocs-app-release.zip .
+          zip -r ../release.zip .
 
       - name: Create or update GitHub Release 'latest'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
           name: Latest Release
-          files: gdocs-app-release.zip
+          files: release.zip
           body: |
             Atualização automática da release **latest**
             Commit: ${{ github.sha }}
