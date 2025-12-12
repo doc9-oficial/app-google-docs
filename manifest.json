@@ -1,146 +1,146 @@
 {
-    "name": "app-google-docs",
-    "version": "2.0.0",
-    "description": "Integração com Google Docs/Drive",
-    "auth": {
-        "description": {
-            "title": "Token de autenticação à API do Google",
-            "body": "Para usar esta aplicação, você precisa de um token de autenticação do Google com as seguintes permissões:\n\n- https://www.googleapis.com/auth/drive.readonly\n- https://www.googleapis.com/auth/documents.readonly\n\nVocê pode obter um token criando um projeto no [Google Cloud Console](https://console.cloud.google.com/), habilitando a API do Google Drive e Google Docs, e criando credenciais de OAuth 2.0. Após criar as credenciais, você pode usar a ferramenta [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/) para gerar um token de acesso com as permissões necessárias.",
-            "link": "https://developers.google.com/identity/protocols/oauth2"
-        },
-        "params": [
-            {
-                "name": "googleAccessToken",
-                "type": "string",
-                "inputType": "password",
-                "required": true
-            }
-        ]
+  "name": "app-google-docs",
+  "version": "2.0.0",
+  "description": "Integração com Google Docs/Drive",
+  "auth": {
+    "description": {
+      "title": "Credenciais do Service Account do Google",
+      "body": "Para usar esta aplicação, você precisa fornecer as credenciais de um Service Account do Google com as seguintes permissões:\n\n- https://www.googleapis.com/auth/drive\n- https://www.googleapis.com/auth/documents\n\nVocê pode obter um Service Account criando um projeto no [Google Cloud Console](https://console.cloud.google.com/), habilitando a API do Google Drive e Google Docs, e criando um Service Account. Após criar o Service Account, baixe o arquivo JSON com as credenciais e cole todo o conteúdo do arquivo no campo abaixo.\n\n**Importante**: Para acessar documentos específicos, você precisa compartilhar esses documentos com o email do Service Account (campo `client_email` no JSON).",
+      "link": "https://cloud.google.com/iam/docs/service-accounts"
     },
-    "functions": {
-        "listarArquivos": {
-            "name": "Listar Arquivos no Google Drive",
-            "script": "dist/listarArquivos.js",
-            "description": "Lista arquivos no Google Drive",
-            "category": "google",
-            "values": {
-                "q": "mimeType contains 'application/'",
-                "pageSize": 20
-            },
-            "help": {
-                "title": "Listagem de Arquivos no Google Drive",
-                "body": "Esta função lista arquivos armazenados no seu Google Drive. Você pode aplicar filtros para refinar os resultados, como tipo de arquivo ou nome. O parâmetro `pageSize` define o número máximo de arquivos a serem retornados na resposta.",
-                "footer": "Certifique-se de que o token de acesso tenha as permissões necessárias para acessar os arquivos do Google Drive."
-            },
-            "params": [
-                {
-                    "name": "q",
-                    "type": "string",
-                    "inputType": "text",
-                    "required": false,
-                    "label": "Filtro de consulta"
-                },
-                {
-                    "name": "pageSize",
-                    "type": "number",
-                    "required": false,
-                    "inputType": "number",
-                    "label": "Número máximo de arquivos a retornar"
-                }
-            ]
+    "params": [
+      {
+        "name": "googleServiceAccount",
+        "type": "string",
+        "inputType": "textarea",
+        "required": true
+      }
+    ]
+  },
+  "functions": {
+    "listarArquivos": {
+      "name": "Listar Arquivos no Google Drive",
+      "script": "dist/listarArquivos.js",
+      "description": "Lista arquivos no Google Drive",
+      "category": "google",
+      "values": {
+        "q": "mimeType contains 'application/'",
+        "pageSize": 20
+      },
+      "help": {
+        "title": "Listagem de Arquivos no Google Drive",
+        "body": "Esta função lista arquivos armazenados no Google Drive acessíveis pelo Service Account. Você pode aplicar filtros para refinar os resultados, como tipo de arquivo ou nome. O parâmetro `pageSize` define o número máximo de arquivos a serem retornados na resposta.\n\n**Nota**: Apenas arquivos compartilhados com o Service Account serão listados.",
+        "footer": "Certifique-se de compartilhar os arquivos desejados com o email do Service Account."
+      },
+      "params": [
+        {
+          "name": "q",
+          "type": "string",
+          "inputType": "text",
+          "required": false,
+          "label": "Filtro de consulta"
         },
-        "lerDocumento": {
-            "name": "Ler Documento do Google Docs",
-            "icon": "NotepadText",
-            "script": "dist/lerDocumento.js",
-            "description": "Lê um documento do Google Docs",
-            "category": "google",
-            "values": {
-                "documentId": "1AbcXYZ..."
-            },
-            "help": {
-                "title": "Leitura de Documento do Google Docs",
-                "body": "Esta função lê o conteúdo de um documento específico do Google Docs usando o ID do documento. O ID do documento pode ser encontrado na URL do documento quando você o abre no Google Docs.",
-                "footer": "Certifique-se de que o token de acesso tenha as permissões necessárias para acessar o documento do Google Docs."
-            },
-            "params": [
-                {
-                    "name": "documentId",
-                    "type": "string",
-                    "required": true,
-                    "inputType": "text",
-                    "label": "ID do documento"
-                }
-            ]
-        },
-        "criarDocumento": {
-            "name": "Criar Documento no Google Docs",
-            "icon": "SquarePen",
-            "script": "dist/criarDocumento.js",
-            "description": "Cria um novo documento no Google Docs",
-            "category": "google",
-            "values": {
-                "titulo": "Olá, Mundo! Aqui é o doc doc go.",
-                "content": "Este é o conteúdo inicial do documento."
-            },
-            "help": {
-                "title": "Criação de Documento no Google Docs",
-                "body": "Esta função cria um novo documento no Google Docs com um título e conteúdo inicial especificados. Você pode personalizar o título e o conteúdo conforme necessário.",
-                "footer": "Certifique-se de que o token de acesso tenha as permissões necessárias para criar documentos no Google Docs."
-            },
-            "params": [
-                {
-                    "name": "titulo",
-                    "type": "string",
-                    "required": true,
-                    "inputType": "text",
-                    "label": "Título do novo documento"
-                },
-                {
-                    "name": "content",
-                    "type": "string",
-                    "required": false,
-                    "inputType": "text",
-                    "label": "Conteúdo inicial do documento (opcional)"
-                }
-            ]
-        },
-        "atualizarDocumento": {
-            "name": "Atualizar Documento no Google Docs",
-            "icon": "Files",
-            "script": "dist/atualizarDocumento.js",
-            "description": "Atualiza o conteúdo de um documento do Google Docs",
-            "category": "google",
-            "values": {
-                "documentId": "1AbcXYZ...",
-                "content": "Este é o novo conteúdo do documento."
-            },
-            "help": {
-                "title": "Atualização de Documento no Google Docs",
-                "body": "Esta função atualiza o conteúdo de um documento existente no Google Docs usando o ID do documento. Você pode fornecer o novo conteúdo que deseja inserir no documento.",
-                "footer": "Certifique-se de que o token de acesso tenha as permissões necessárias para editar o documento do Google Docs."
-            },
-            "params": [
-                {
-                    "name": "documentId",
-                    "type": "string",
-                    "required": true,
-                    "inputType": "text",
-                    "label": "ID do documento"
-                },
-                {
-                    "name": "content",
-                    "type": "string",
-                    "required": true,
-                    "inputType": "text",
-                    "label": "Novo conteúdo do documento"
-                }
-            ]
+        {
+          "name": "pageSize",
+          "type": "number",
+          "required": false,
+          "inputType": "number",
+          "label": "Número máximo de arquivos a retornar"
         }
+      ]
     },
-    "config": {
-        "timeout": 60000,
-        "max_retries": 2
+    "lerDocumento": {
+      "name": "Ler Documento do Google Docs",
+      "icon": "NotepadText",
+      "script": "dist/lerDocumento.js",
+      "description": "Lê um documento do Google Docs",
+      "category": "google",
+      "values": {
+        "documentId": "1AbcXYZ..."
+      },
+      "help": {
+        "title": "Leitura de Documento do Google Docs",
+        "body": "Esta função lê o conteúdo de um documento específico do Google Docs usando o ID do documento. O ID do documento pode ser encontrado na URL do documento quando você o abre no Google Docs.",
+        "footer": "Certifique-se de compartilhar o documento com o email do Service Account para que ele possa ser acessado."
+      },
+      "params": [
+        {
+          "name": "documentId",
+          "type": "string",
+          "required": true,
+          "inputType": "text",
+          "label": "ID do documento"
+        }
+      ]
     },
-    "mcp": true
+    "criarDocumento": {
+      "name": "Criar Documento no Google Docs",
+      "icon": "SquarePen",
+      "script": "dist/criarDocumento.js",
+      "description": "Cria um novo documento no Google Docs (requer quota de armazenamento)",
+      "category": "google",
+      "values": {
+        "titulo": "Olá, Mundo! Aqui é o doc doc go.",
+        "content": "Este é o conteúdo inicial do documento."
+      },
+      "help": {
+        "title": "Criação de Documento no Google Docs",
+        "body": "Esta função cria um novo documento no Google Docs com um título e conteúdo inicial especificados. Você pode personalizar o título e o conteúdo conforme necessário.\n\n**Limitação**: Service accounts gratuitos têm 0GB de quota de armazenamento, impedindo a criação de novos documentos. Para criar documentos, use uma conta Google Workspace com quota disponível ou crie documentos manualmente e compartilhe-os com o Service Account.",
+        "footer": "O documento criado pertencerá ao Service Account. Compartilhe-o com outros usuários se necessário."
+      },
+      "params": [
+        {
+          "name": "titulo",
+          "type": "string",
+          "required": true,
+          "inputType": "text",
+          "label": "Título do novo documento"
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": false,
+          "inputType": "text",
+          "label": "Conteúdo inicial do documento (opcional)"
+        }
+      ]
+    },
+    "atualizarDocumento": {
+      "name": "Atualizar Documento no Google Docs",
+      "icon": "Files",
+      "script": "dist/atualizarDocumento.js",
+      "description": "Atualiza o conteúdo de um documento do Google Docs",
+      "category": "google",
+      "values": {
+        "documentId": "1AbcXYZ...",
+        "content": "Este é o novo conteúdo do documento."
+      },
+      "help": {
+        "title": "Atualização de Documento no Google Docs",
+        "body": "Esta função atualiza o conteúdo de um documento existente no Google Docs usando o ID do documento. Você pode fornecer o novo conteúdo que deseja inserir no documento.",
+        "footer": "Certifique-se de compartilhar o documento com permissão de edição para o email do Service Account."
+      },
+      "params": [
+        {
+          "name": "documentId",
+          "type": "string",
+          "required": true,
+          "inputType": "text",
+          "label": "ID do documento"
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "inputType": "text",
+          "label": "Novo conteúdo do documento"
+        }
+      ]
+    }
+  },
+  "config": {
+    "timeout": 60000,
+    "max_retries": 2
+  },
+  "mcp": true
 }
