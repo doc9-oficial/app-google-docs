@@ -1,7 +1,7 @@
 {
   "name": "app-google-docs",
   "version": "2.0.0",
-  "description": "Integração com Google Docs/Drive",
+  "description": "Integração com Google API",
   "auth": {
     "description": {
       "title": "Credenciais do Service Account do Google",
@@ -20,7 +20,8 @@
   "functions": {
     "listarArquivos": {
       "name": "Listar Arquivos no Google Drive",
-      "script": "dist/listarArquivos.js",
+      "icon": "FolderSearch",
+      "script": "dist/listFiles.js",
       "description": "Lista arquivos no Google Drive",
       "category": "google",
       "values": {
@@ -46,17 +47,25 @@
           "required": false,
           "inputType": "number",
           "label": "Número máximo de arquivos a retornar"
+        },
+        {
+          "name": "pageToken",
+          "type": "string",
+          "required": false,
+          "inputType": "text",
+          "label": "Token para trabalhar com paginação"
         }
       ]
     },
     "lerDocumento": {
-      "name": "Ler Documento do Google Docs",
-      "icon": "NotepadText",
-      "script": "dist/lerDocumento.js",
+      "name": "Ler documento do Google Docs",
+      "icon": "FileText",
+      "script": "dist/readDocument.js",
       "description": "Lê um documento do Google Docs",
       "category": "google",
       "values": {
-        "documentId": "1AbcXYZ..."
+        "documentId": "1AbcXYZ...",
+        "mode": "ONLY_TEXT"
       },
       "help": {
         "title": "Leitura de Documento do Google Docs",
@@ -70,14 +79,63 @@
           "required": true,
           "inputType": "text",
           "label": "ID do documento"
+        },
+        {
+          "name": "mode",
+          "type": "string",
+          "required": true,
+          "inputType": "select",
+          "label": "Modo",
+          "options": [
+            {
+              "label": "Apenas texto",
+              "value": "ONLY_TEXT"
+            },
+            {
+              "label": "Árvore de parágrafos",
+              "value": "PARAGRAPH_TREE"
+            }
+          ]
+        }
+      ]
+    },
+    "lerPlanilha": {
+      "name": "Ler planilha do Google Sheets",
+      "icon": "Sheet",
+      "script": "dist/readSpreadsheet.js",
+      "description": "Lê uma planilha do Google Sheets",
+      "category": "google",
+      "values": {
+        "sheetId": "1AbcXYZ...",
+        "range": "A1:Z1000"
+      },
+      "help": {
+        "title": "Leitura de Planilha do Google Sheets",
+        "body": "Esta função lê o conteúdo de um documento específico do Google Sheets usando o ID da planilha. O ID da planilha pode ser encontrado na URL dela quando você o abre no Google Sheets.",
+        "footer": "Certifique-se de compartilhar o documento com o email do Service Account para que ele possa ser acessado."
+      },
+      "params": [
+        {
+          "name": "sheetId",
+          "type": "string",
+          "required": true,
+          "inputType": "text",
+          "label": "ID da planilha"
+        },
+        {
+          "name": "range",
+          "type": "string",
+          "required": true,
+          "inputType": "text",
+          "label": "Range de onde serão buscado os dados. Ex: A1:C10"
         }
       ]
     },
     "criarDocumento": {
       "name": "Criar Documento no Google Docs",
-      "icon": "SquarePen",
-      "script": "dist/criarDocumento.js",
-      "description": "Cria um novo documento no Google Docs (requer quota de armazenamento)",
+      "icon": "FilePlus",
+      "script": "dist/createDocument.js",
+      "description": "Cria um novo documento no Google Docs",
       "category": "google",
       "values": {
         "titulo": "Olá, Mundo! Aqui é o doc doc go.",
@@ -100,16 +158,48 @@
           "name": "content",
           "type": "string",
           "required": false,
-          "inputType": "text",
+          "inputType": "textarea",
           "label": "Conteúdo inicial do documento (opcional)"
+        }
+      ]
+    },
+    "criarPlanilha": {
+      "name": "Criar Planilha no Google Sheets",
+      "icon": "Sheet",
+      "script": "dist/createSpreadsheet.js",
+      "description": "Cria uma nova planilha no Google Sheets ",
+      "category": "google",
+      "values": {
+        "titulo": "Planilha de Exemplo",
+        "content": "Nome,Idade,Cidade\nJosé,28,São Paulo\nMaria,31,Rio de Janeiro"
+      },
+      "help": {
+        "title": "Criação de Planilha no Google Sheets",
+        "body": "Esta função cria uma nova planilha no Google Sheets utilizando um Service Account. Após a criação, se o campo **content** for informado, os dados serão inseridos automaticamente a partir da célula **A1**.\n\nO conteúdo deve estar no formato **CSV**, onde:\n- Cada linha representa uma linha da planilha\n- Cada valor separado por vírgula representa uma coluna\n\nExemplo:\n\n```\nNome,Idade\nJosé,28\nMaria,31\n```\n\nOs valores são inseridos usando o modo **USER_ENTERED**, o que significa que números, datas e fórmulas serão interpretados da mesma forma que se fossem digitados manualmente no Google Sheets.",
+        "footer": "A planilha criada pertencerá ao Service Account. Para acesso de outros usuários, compartilhe a planilha manualmente ou via Drive API."
+      },
+      "params": [
+        {
+          "name": "titulo",
+          "type": "string",
+          "required": true,
+          "inputType": "text",
+          "label": "Título da nova planilha"
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": false,
+          "inputType": "textarea",
+          "label": "Conteúdo inicial da planilha (CSV)"
         }
       ]
     },
     "atualizarDocumento": {
       "name": "Atualizar Documento no Google Docs",
-      "icon": "Files",
-      "script": "dist/atualizarDocumento.js",
-      "description": "Atualiza o conteúdo de um documento do Google Docs",
+      "icon": "FilePenLine",
+      "script": "dist/updateDocument.js",
+      "description": "Substitui o conteúdo de um documento do Google Docs",
       "category": "google",
       "values": {
         "documentId": "1AbcXYZ...",
@@ -117,7 +207,7 @@
       },
       "help": {
         "title": "Atualização de Documento no Google Docs",
-        "body": "Esta função atualiza o conteúdo de um documento existente no Google Docs usando o ID do documento. Você pode fornecer o novo conteúdo que deseja inserir no documento.",
+        "body": "Esta função substitui o conteúdo do corpo (body) de um documento existente no Google Docs usando o ID do documento. Você pode fornecer o novo conteúdo que deseja inserir no documento.",
         "footer": "Certifique-se de compartilhar o documento com permissão de edição para o email do Service Account."
       },
       "params": [
@@ -132,8 +222,48 @@
           "name": "content",
           "type": "string",
           "required": true,
-          "inputType": "text",
+          "inputType": "textarea",
           "label": "Novo conteúdo do documento"
+        }
+      ]
+    },
+    "atualizarPlanilha": {
+      "name": "Atualizar Planilha no Google Sheets",
+      "icon": "Grid2X2",
+      "script": "dist/updateSpreadsheet.js",
+      "description": "Atualiza o valor de uma célula em uma planilha do Google Sheets",
+      "category": "google",
+      "values": {
+        "sheetId": "1AbcXYZ...",
+        "content": "Novo valor da célula",
+        "range": "A1"
+      },
+      "help": {
+        "title": "Atualização de Planilha no Google Sheets",
+        "body": "Esta função atualiza uma **planilha do Google Sheets** utilizando um Service Account.\n\nO valor informado em **content** será inserido em uma célula específica da planilha, definida pelo campo **range** (notação A1).\n\nComportamento:\n- Se **range** não for informado, o valor será inserido em **A1** da primeira aba.\n- O valor é escrito como **USER_ENTERED**, ou seja, números, datas e fórmulas são interpretados como se fossem digitados manualmente.\n\nExemplos de range válidos:\n- `A1`\n- `B2`\n- `AA10`\n- `Sheet1!C3`",
+        "footer": "A planilha deve estar compartilhada com permissão de edição para o email do Service Account."
+      },
+      "params": [
+        {
+          "name": "sheetId",
+          "type": "string",
+          "required": true,
+          "inputType": "text",
+          "label": "ID da planilha (Google Sheets)"
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "inputType": "textarea",
+          "label": "Conteúdo a ser inserido na célula"
+        },
+        {
+          "name": "range",
+          "type": "string",
+          "required": false,
+          "inputType": "text",
+          "label": "Célula de destino (A1, B2, Sheet1!C3)"
         }
       ]
     }
