@@ -19,7 +19,7 @@
   },
   "functions": {
     "listarArquivos": {
-      "name": "Listar Arquivos no Google Drive",
+      "name": "Google - Listar Arquivos no Google Drive",
       "icon": "FolderSearch",
       "script": "dist/listFiles.js",
       "description": "Lista arquivos no Google Drive",
@@ -58,7 +58,7 @@
       ]
     },
     "lerDocumento": {
-      "name": "Ler documento do Google Docs",
+      "name": "Google - Ler documento do Google Docs",
       "icon": "FileText",
       "script": "dist/readDocument.js",
       "description": "Lê um documento do Google Docs",
@@ -100,7 +100,7 @@
       ]
     },
     "lerPlanilha": {
-      "name": "Ler planilha do Google Sheets",
+      "name": "Google - Ler planilha do Google Sheets",
       "icon": "Sheet",
       "script": "dist/readSpreadsheet.js",
       "description": "Lê uma planilha do Google Sheets",
@@ -132,7 +132,7 @@
       ]
     },
     "criarDocumento": {
-      "name": "Criar Documento no Google Docs",
+      "name": "Google - Criar Documento no Google Docs",
       "icon": "FilePlus",
       "script": "dist/createDocument.js",
       "description": "Cria um novo documento no Google Docs",
@@ -164,7 +164,7 @@
       ]
     },
     "criarPlanilha": {
-      "name": "Criar Planilha no Google Sheets",
+      "name": "Google - Criar Planilha no Google Sheets",
       "icon": "Sheet",
       "script": "dist/createSpreadsheet.js",
       "description": "Cria uma nova planilha no Google Sheets ",
@@ -196,7 +196,7 @@
       ]
     },
     "atualizarDocumento": {
-      "name": "Atualizar Documento no Google Docs",
+      "name": "Google - Atualizar Documento no Google Docs",
       "icon": "FilePenLine",
       "script": "dist/updateDocument.js",
       "description": "Substitui o conteúdo de um documento do Google Docs",
@@ -228,7 +228,7 @@
       ]
     },
     "atualizarPlanilha": {
-      "name": "Atualizar Planilha no Google Sheets",
+      "name": "Google - Atualizar Planilha no Google Sheets",
       "icon": "Grid2X2",
       "script": "dist/updateSpreadsheet.js",
       "description": "Atualiza o valor de uma célula em uma planilha do Google Sheets",
