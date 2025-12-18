@@ -32,6 +32,7 @@ async function criarDocumento(params: CreateFileParams): Promise<void> {
     const created = await drive.create({
       name: params.titulo,
       mimeType: "application/vnd.google-apps.document",
+      parents: [params.sharedDriveId],
     });
 
     const documentId = created?.id;

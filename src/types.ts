@@ -29,6 +29,7 @@ export interface ServiceAccount {
 }
 
 export interface CreateFileParams {
+  sharedDriveId: string;
   titulo: string;
   content?: string;
 }

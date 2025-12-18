@@ -123,7 +123,7 @@ export class GoogleDriveApi {
       "https://www.googleapis.com",
       "/drive/v3/files",
       body,
-      { fields }
+      { fields, supportsAllDrives: "true" }
     );
   }
 }

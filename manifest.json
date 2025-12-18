@@ -139,7 +139,8 @@
       "category": "google",
       "values": {
         "titulo": "Olá, Mundo! Aqui é o doc doc go.",
-        "content": "Este é o conteúdo inicial do documento."
+        "content": "Este é o conteúdo inicial do documento.",
+        "sharedDriveId": ""
       },
       "help": {
         "title": "Criação de Documento no Google Docs",
@@ -147,6 +148,14 @@
         "footer": "O documento criado pertencerá ao Service Account. Compartilhe-o com outros usuários se necessário."
       },
       "params": [
+        {
+          "name": "sharedDriveId",
+          "type": "string",
+          "required": true,
+          "inputType": "text",
+          "label": "ID da pasta compartilhada",
+          "helperText": "Essa pasta deve estar dentro de Drive -> Drives compartilhados"
+        },
         {
           "name": "titulo",
           "type": "string",
@@ -171,7 +180,8 @@
       "category": "google",
       "values": {
         "titulo": "Planilha de Exemplo",
-        "content": "Nome,Idade,Cidade\nJosé,28,São Paulo\nMaria,31,Rio de Janeiro"
+        "content": "Nome,Idade,Cidade\nJosé,28,São Paulo\nMaria,31,Rio de Janeiro",
+        "sharedDriveId": ""
       },
       "help": {
         "title": "Criação de Planilha no Google Sheets",
@@ -179,6 +189,14 @@
         "footer": "A planilha criada pertencerá ao Service Account. Para acesso de outros usuários, compartilhe a planilha manualmente ou via Drive API."
       },
       "params": [
+        {
+          "name": "sharedDriveId",
+          "type": "string",
+          "required": true,
+          "inputType": "text",
+          "label": "ID da pasta compartilhada",
+          "helperText": "Essa pasta deve estar dentro de Drive -> Drives compartilhados"
+        },
         {
           "name": "titulo",
           "type": "string",

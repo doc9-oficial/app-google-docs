@@ -34,6 +34,7 @@ async function criarPlanilha(params: CreateFileParams): Promise<void> {
     const created = await drive.create({
       name: params.titulo,
       mimeType: "application/vnd.google-apps.spreadsheet",
+      parents: [params.sharedDriveId],
     });
 
     const fileId = created?.id;
