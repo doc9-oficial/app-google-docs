@@ -4,6 +4,7 @@ import { getServiceAccountCredentials } from "./utils";
 import { GoogleApi } from "./google/google";
 import { GoogleDriveApi } from "./google/drive";
 import { CreateFileParams } from "./types";
+import { GoogleDocsApi } from "./google/docs";
 
 async function criarDocumento(params: CreateFileParams): Promise<void> {
   try {
@@ -28,6 +29,7 @@ async function criarDocumento(params: CreateFileParams): Promise<void> {
 
     const google = new GoogleApi(credentials);
     const drive = new GoogleDriveApi(google);
+    const docs = new GoogleDocsApi(google);
 
     const created = await drive.create({
       name: params.titulo,
@@ -43,12 +45,17 @@ async function criarDocumento(params: CreateFileParams): Promise<void> {
       return;
     }
 
+    var updates;
+    if (params.content && params.content.trim().length > 0) {
+      updates = await docs.updateById(created.id, params.content);
+    }
+
     console.log(
       docgo.result(true, {
         id: documentId,
-        documentId,
         title: params.titulo,
         created,
+        updates,
       })
     );
   } catch (err: any) {
