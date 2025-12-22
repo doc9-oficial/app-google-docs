@@ -26,7 +26,8 @@
       "category": "google",
       "values": {
         "q": "mimeType contains 'application/'",
-        "pageSize": 20
+        "pageSize": 20,
+        "sharedDriveId": ""
       },
       "help": {
         "title": "Listagem de Arquivos no Google Drive",
@@ -34,6 +35,14 @@
         "footer": "Certifique-se de compartilhar os arquivos desejados com o email do Service Account."
       },
       "params": [
+        {
+          "name": "sharedDriveId",
+          "type": "string",
+          "required": true,
+          "inputType": "text",
+          "label": "ID da pasta compartilhada",
+          "helperText": "Essa pasta deve estar dentro de Drive -> Drives compartilhados"
+        },
         {
           "name": "q",
           "type": "string",

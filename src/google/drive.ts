@@ -6,6 +6,7 @@ export type DriveListParams = {
   q?: string;
   fields?: string;
   orderBy?: string;
+  sharedDriveId?: string;
 };
 
 export interface DriveFile {
@@ -59,16 +60,26 @@ export class GoogleDriveApi {
       pageToken,
       fields = "nextPageToken,files(id,name,mimeType)",
       orderBy = "modifiedTime desc",
+      sharedDriveId,
     } = params;
 
     const query: Query = {
       pageSize: String(pageSize),
       fields,
       orderBy,
+      supportsAllDrives: "true",
+      includeItemsFromAllDrives: "true",
     };
 
     if (q) query.q = q;
     if (pageToken) query.pageToken = pageToken;
+
+    if (sharedDriveId) {
+      query.driveId = sharedDriveId;
+      query.corpora = "drive";
+    } else {
+      query.corpora = "allDrives";
+    }
 
     return this.google.get(
       "https://www.googleapis.com",

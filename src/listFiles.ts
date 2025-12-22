@@ -8,6 +8,7 @@ interface ListarArquivosParams {
   q?: string;
   pageSize?: number;
   pageToken?: string;
+  sharedDriveId?: string;
 }
 
 async function listarArquivos(params: ListarArquivosParams): Promise<void> {
@@ -43,6 +44,7 @@ async function listarArquivos(params: ListarArquivosParams): Promise<void> {
       fields:
         "nextPageToken,files(id,name,mimeType,parents,modifiedTime,createdTime,webViewLink)",
       orderBy: "modifiedTime desc",
+      sharedDriveId: params?.sharedDriveId,
     });
 
     console.log(docgo.result(true, result));
