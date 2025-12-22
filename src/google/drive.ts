@@ -43,7 +43,7 @@ export class GoogleDriveApi {
     return this.google.get(
       "https://www.googleapis.com",
       `/drive/v3/files/${encodeURIComponent(fileId)}`,
-      { fields }
+      { fields, supportsAllDrives: "true" }
     );
   }
 
@@ -91,15 +91,15 @@ export class GoogleDriveApi {
   /**
    * PATCH /drive/v3/files/{fileId}
    * Atualiza metadados (ex: name, description, starred, etc.)
-   *
-   * OBS: para mover pasta/parents, também é via update, mas usando addParents/removeParents.
    */
   async updateById(
     fileId: string,
     body: any,
     params?: { fields?: string; addParents?: string; removeParents?: string }
   ): Promise<any> {
-    const query: Query = {};
+    const query: Query = {
+      supportsAllDrives: "true",
+    };
     if (params?.fields) query.fields = params.fields;
     if (params?.addParents) query.addParents = params.addParents;
     if (params?.removeParents) query.removeParents = params.removeParents;
@@ -118,7 +118,8 @@ export class GoogleDriveApi {
   async deleteById(fileId: string): Promise<void> {
     await this.google.delete(
       "https://www.googleapis.com",
-      `/drive/v3/files/${encodeURIComponent(fileId)}`
+      `/drive/v3/files/${encodeURIComponent(fileId)}`,
+      { supportsAllDrives: "true" }
     );
   }
 
@@ -134,7 +135,10 @@ export class GoogleDriveApi {
       "https://www.googleapis.com",
       "/drive/v3/files",
       body,
-      { fields, supportsAllDrives: "true" }
+      {
+        fields,
+        supportsAllDrives: "true",
+      }
     );
   }
 }
