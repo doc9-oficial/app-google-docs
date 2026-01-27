@@ -5,8 +5,8 @@
   "auth": {
     "description": {
       "title": "Credenciais do Service Account do Google",
-      "body": "Forneça as credenciais de um Service Account do Google com as seguintes permissões:\n\n- https://www.googleapis.com/auth/drive\n- https://www.googleapis.com/auth/documents\n\nVocê pode obter um Service Account criando um projeto no [Google Cloud Console](https://console.cloud.google.com/). Após criar o Service Account, baixe o arquivo JSON com as credenciais e cole todo o conteúdo do arquivo no campo abaixo.\n\n**Importante**: Para acessar documentos específicos, você precisa compartilhar esses documentos com o email do Service Account (campo `client_email` no JSON).",
-      "link": "https://cloud.google.com/iam/docs/service-accounts"
+      "body": "Para configurar o serviço de criação de documentos, é necessário capturar os dados da API e parâmetros dos serviços, disponíveis na documentação abaixo.",
+      "link": "https://developers.google.com/workspace/docs/api/how-tos/overview?hl=pt-br"
     },
     "params": [
       {
