@@ -31,7 +31,7 @@
       },
       "help": {
         "title": "Listagem de Arquivos no Google Drive",
-        "body": "Esta função lista arquivos armazenados no Google Drive acessíveis pelo Service Account. Você pode aplicar filtros para refinar os resultados, como tipo de arquivo ou nome. O parâmetro `pageSize` define o número máximo de arquivos a serem retornados na resposta.\n\n**Nota**: Apenas arquivos compartilhados com o Service Account serão listados.",
+        "body": "Para configurar o serviço de criação de documentos, é necessário capturar os dados da API e parâmetros dos serviços, disponíveis na documentação abaixo.",
         "footer": "Certifique-se de compartilhar os arquivos desejados com o email do Service Account."
       },
       "params": [
