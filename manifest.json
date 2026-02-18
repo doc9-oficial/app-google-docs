@@ -1,5 +1,6 @@
 {
   "name": "app-google-docs",
+  "displayName": "Google",
   "version": "2.0.0",
   "description": "Integração com Google API",
   "icon": "Globe",
