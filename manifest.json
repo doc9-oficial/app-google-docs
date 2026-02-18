@@ -2,6 +2,7 @@
   "name": "app-google-docs",
   "version": "2.0.0",
   "description": "Integração com Google API",
+  "icon": "Globe",
   "auth": {
     "description": {
       "title": "Credenciais do Service Account do Google",
